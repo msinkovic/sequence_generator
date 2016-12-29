@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Implementation-Title: unique-sequence-number-generator
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: Martin
+Implementation-Vendor-Id: com.springwebapp
+Build-Jdk: 1.8.0_73
+Implementation-URL: http://projects.spring.io/spring-boot/unique-seque
+ nce-number-generator3/
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+

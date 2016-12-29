@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>Spring Framework Guru</title>
+
+</head>
+<body>
+<div class="container">
+    <div>
+        <h2>Data List</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>NO.</th>
+                <th>Submitted By</th>
+                <th>Purpose</th>
+                <th>Date</th>
+            </tr>
+            <tr th:each="generatedData : ${generatedDataList}">
+                <td th:text="${generatedData.seqNum}"><a href="/generatedData/${generatedData.getSeqNum()}">NO.</a></td>
+                <td th:text="${generatedData.username}">Submitted By</td>
+                <td th:text="${generatedData.purpose}">Purpose</td>
+                <td th:text="${generatedData.date}">Date</td></tr>
+        </table>
+
+    </div>
+</div>
+
+</body>
+</html>
