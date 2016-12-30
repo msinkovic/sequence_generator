@@ -15,6 +15,10 @@ import com.springwebapp.validator.UserValidator;
 
 @Controller
 public class UserController {
+	
+	@Autowired
+	private DataController dataController;
+	
     @Autowired
     private UserService userService;
 
@@ -59,6 +63,6 @@ public class UserController {
 
     @RequestMapping(value = {"/", "/hello"}, method = RequestMethod.GET)
     public String welcome(Model model) {
-        return "hello";
+        return dataController.dataList(model);
     }
 }

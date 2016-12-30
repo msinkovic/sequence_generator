@@ -1,6 +1,8 @@
 package com.springwebapp.domain;
 
-import java.sql.Date;
+
+
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,13 +10,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Version;
+
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name="GENERATED_DATA")
 public class GeneratedData {
 	
 	@Column(name="DATE")
-	private Date date;
+	@Type(type = "java.time.LocalDateTime")
+	private LocalDateTime date;
 
 	@Column(name="PURPOSE")
 	private String purpose;
@@ -25,21 +31,40 @@ public class GeneratedData {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="SEQ_NUM")
-	private long seqNum;
+	private Long seqNum;
 	
+	@Column(name="NEXT_SEQ_NUM")
+	private Long nextSeqNum;
+	
+	@Version
+	@Column(name="VERSION")
+	private Integer version;
+	
+	public Integer getVersion() {
+		return version;
+	}
+
+	public Long getNextSeqNum() {
+		return nextSeqNum;
+	}
+
+	public void setNextSeqNum(Long nextSeqNum) {
+		this.nextSeqNum = nextSeqNum;
+	}
+
 	public GeneratedData()
 	{
-		
+		this.date = LocalDateTime.now();
 	}
 	
-	public GeneratedData(Date date, String purpose, String username)
+	public GeneratedData(LocalDateTime date, String purpose, String username)
 	{
 		this.date = date;
 		this.purpose = purpose;
 		this.username = username;
 	}
 
-	public Date getDate() {
+	public LocalDateTime getDate() {
 		return date;
 	}
 
@@ -51,11 +76,11 @@ public class GeneratedData {
 		return username;
 	}
 
-	public long getSeqNum() {
+	public Long getSeqNum() {
 		return seqNum;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(LocalDateTime date) {
 		this.date = date;
 	}
 

@@ -1,30 +1,15 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head lang="en">
-
-    <title>Spring Framework Guru</title>
-
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<div class="container">
-    <div>
-        <h2>Data List</h2>
-        <table class="table table-striped">
-            <tr>
-                <th>NO.</th>
-                <th>Submitted By</th>
-                <th>Purpose</th>
-                <th>Date</th>
-            </tr>
-            <tr th:each="generatedData : ${generatedDataList}">
-                <td th:text="${generatedData.seqNum}"><a href="/generatedData/${generatedData.getSeqNum()}">NO.</a></td>
-                <td th:text="${generatedData.username}">Submitted By</td>
-                <td th:text="${generatedData.purpose}">Purpose</td>
-                <td th:text="${generatedData.date}">Date</td></tr>
-        </table>
-
-    </div>
-</div>
-
+	<h1>Result</h1>
+    <p th:text="'seqNum: ' + ${nextSeqNum}" />
+    <p th:text="'username: ' + ${username}" />
+    <p th:text="'date: ' + ${date}" />
+    <p th:text="'purpose: ' + ${purpose}" />
+    <a href="/generateData">Submit another message</a>
 </body>
 </html>

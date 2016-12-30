@@ -1,7 +1,5 @@
 package com.springwebapp.bootstrap;
 
-import java.util.Date;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
@@ -9,30 +7,28 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import com.springwebapp.domain.GeneratedData;
 import com.springwebapp.domain.UserRoles;
 import com.springwebapp.domain.Users;
-import com.springwebapp.repositories.GeneratedDataRepository;
 import com.springwebapp.repositories.UserRolesRepository;
 import com.springwebapp.repositories.UsersRepository;
 
 @Component
 public class GeneratedDataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
-	private GeneratedDataRepository dataRepository;
+	//private GeneratedDataRepository dataRepository;
 	private UsersRepository userRepository;
 	private UserRolesRepository userRolesRepository;
 
-	private Logger logData = Logger.getLogger(GeneratedDataLoader.class);
+	//private Logger logData = Logger.getLogger(GeneratedDataLoader.class);
 
 	private Logger logUser = Logger.getLogger(UsersLoader.class);
 	
 	private Logger logRole = Logger.getLogger(UserRolesLoader.class);
 
-	@Autowired
+	/*@Autowired
 	public void setDataRepository(GeneratedDataRepository dataRepository) {
 		this.dataRepository = dataRepository;
-	}
+	}*/
 
 	@Autowired
 	public void setUserRepository(UsersRepository userRepository) {
@@ -46,9 +42,8 @@ public class GeneratedDataLoader implements ApplicationListener<ContextRefreshed
 
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 
-		GeneratedData test = new GeneratedData();
-		Date utilDate = new Date();
-		java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+	/*	GeneratedData test = new GeneratedData();
+		LocalDateTime sqlDate = LocalDateTime.now();
 		test.setDate(sqlDate);
 		test.setPurpose("nekaj random");
 		test.setUsername("pero");
@@ -59,14 +54,13 @@ public class GeneratedDataLoader implements ApplicationListener<ContextRefreshed
 
 		GeneratedData test2 = new GeneratedData();
 		test2.setPurpose("nekaj ne tolko random");
-		Date utilDate2 = new Date();
-		java.sql.Date sqlDate2 = new java.sql.Date(utilDate2.getTime());
+		LocalDateTime sqlDate2 = LocalDateTime.now();
 		test2.setDate(sqlDate2);
-		test2.setUsername("jure");
+		test2.setUsername("jurica");
 
 		dataRepository.save(test2);
 
-		logData.info("Saved transaction - id:" + test2.getSeqNum());
+		logData.info("Saved transaction - id:" + test2.getSeqNum());*/
 		
 		BCryptPasswordEncoder pwd = new BCryptPasswordEncoder(6);
 
@@ -81,7 +75,7 @@ public class GeneratedDataLoader implements ApplicationListener<ContextRefreshed
 		pwd = new BCryptPasswordEncoder(6);
 
 		Users test4 = new Users();
-		test4.setUsername("jure");
+		test4.setUsername("jurica");
 		test4.setPassword(pwd.encode("password123"));
 
 		userRepository.save(test4);
