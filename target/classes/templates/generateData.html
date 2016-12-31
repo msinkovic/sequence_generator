@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">
+<head lang="en_US">
+
+    <title>New sequence</title>
+
+</head>
+<body>
+<div class="container">
+	<h2>Document details</h2>
+	<form name = "input" th:action = "@{/saveData}" th:object = "${data}" method = "post">
+	    <p class = "label">Sequence is</p>
+	    <input type="text" th:field="*{nextSeqNum}" readonly="readonly"/>
+	    <p class = "label">By User</p>
+	    <input type="text" th:field="*{username}" readonly="readonly"/>
+	    <p class = "label">Purpose</p>
+	    <input type="text" th:field="*{purpose}" required="required"/>
+	    <input type="submit" value="Claim!" />
+    </form>
+    <form name = "cancel" th:action = "@{/generatedDataList}" method = "get">
+	    <input type="submit" value="Cancel"/>
+    </form>
+</div>     
+      
+</body>
+</html>
