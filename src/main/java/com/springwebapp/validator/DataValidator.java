@@ -24,7 +24,7 @@ public class DataValidator implements Validator {
             errors.rejectValue("purpose", "Size.data.purpose");
         }
         if (data.getNextSeqNum() < 0) {
-            errors.rejectValue("version", "The data was modified concurrently.");
+            errors.rejectValue("version", "DataVersion");
         }
     }
 }
