@@ -14,7 +14,8 @@
 	    <p class = "label">By User</p>
 	    <input type="text" th:field="*{username}" readonly="readonly"/>
 	    <p class = "label">Purpose</p>
-	    <input type="text" th:field="*{purpose}" required="required"/>
+	    <input type="text" th:field="*{purpose}"/>
+	    <span th:if="${#fields.hasErrors('purpose')}" th:errors="*{purpose}">Purpose Error</span>
 	    <input type="submit" value="Claim!" />
     </form>
     <form name = "cancel" th:action = "@{/generatedDataList}" method = "get">

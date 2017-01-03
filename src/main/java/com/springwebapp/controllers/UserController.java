@@ -51,12 +51,15 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(Model model, String error, String logout) {
+    public String login(String error, String logout, String empty, Model model) {
         if (error != null)
             model.addAttribute("error", "Your username or password is invalid.");
 
         if (logout != null)
             model.addAttribute("message", "You have been logged out successfully.");
+        
+        if(empty != null)
+        	model.addAttribute("empty", "Username and password are required fields.");
 
         return "login";
     }

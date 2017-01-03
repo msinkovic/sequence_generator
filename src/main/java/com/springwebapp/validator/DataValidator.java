@@ -16,14 +16,14 @@ public class DataValidator implements Validator {
     }
 
     @Override
-    public void validate(Object o, Errors errors) {
-        GeneratedData data = (GeneratedData) o;
+    public void validate(Object object, Errors errors) {
+        GeneratedData data = (GeneratedData) object;
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "Purpose", "NotEmpty");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "purpose", "NotEmpty");
         if (data.getPurpose().length() < 3) {
             errors.rejectValue("purpose", "Size.data.purpose");
         }
-        if (data.getNextSeqNum() < 0) {
+        if (data.getVersion() != null) {
             errors.rejectValue("version", "DataVersion");
         }
     }

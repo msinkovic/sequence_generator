@@ -5,7 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 
@@ -14,7 +16,7 @@ import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 @EnableJpaRepositories(basePackages = "com.springwebapp.domain")
 @EntityScan(basePackages = "com.springwebapp.domain")
 public class UniqueSequenceNumberGeneratorApplication extends SpringBootServletInitializer {
-    
+	
 	@Bean
     public Java8TimeDialect java8TimeDialect() {
         return new Java8TimeDialect();

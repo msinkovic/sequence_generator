@@ -2,14 +2,20 @@ package com.springwebapp.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +29,7 @@ import com.springwebapp.validator.DataValidator;
 
 @Controller
 public class DataController {
-
+	
 	@Autowired
 	private DataValidator dataValidator;
 	
@@ -33,6 +39,17 @@ public class DataController {
 	@Autowired
 	private GeneratedDataRepository generatedDataRepository;
 
+	@InitBinder
+    protected void initBinder(final HttpServletRequest request, final ServletRequestDataBinder binder) {
+        binder.addValidators(dataValidator);
+    }
+	
+	@Bean
+	public MessageSource messageSource() {
+	     ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+	     messageSource.setBasename("/resources");
+	     return messageSource;
+	}
 	
 	@RequestMapping(value = "/generatedDataList", method = RequestMethod.GET)
 	public String dataList(Model model)
@@ -54,21 +71,16 @@ public class DataController {
 	}
 	
 	@PostMapping("/saveData")
-    public String dataSubmit(@Valid @ModelAttribute GeneratedData data, BindingResult bindingResult, @RequestParam(value = "version", required=false) Integer version) {
-		
-		if (data.getVersion() != version) {
-			data.setNextSeqNum((long) -1);
-	    }
-		
+    public String dataSubmit(@Valid @ModelAttribute("data") GeneratedData data, BindingResult bindingResult, @RequestParam(value = "version", required=false) Integer version, Model model) throws Exception{
+				
 		dataValidator.validate(data, bindingResult);
 		
-		 if (bindingResult.hasErrors()) {
-		        return "generateData";
+		if (bindingResult.hasErrors()) {
+		       return "generateData";
 		        
-		    } else {
+		   } else {
 				generatedDataRepository.save(data);
 		        return "redirect:/hello";
-		    }
+		   }
     }
-	
 }

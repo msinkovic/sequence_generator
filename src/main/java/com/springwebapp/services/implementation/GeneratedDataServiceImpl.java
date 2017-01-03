@@ -11,7 +11,7 @@ import com.springwebapp.services.GeneratedDataService;
 
 @Service
 public class GeneratedDataServiceImpl implements GeneratedDataService{
-
+	
 	@Autowired
 	private GeneratedDataRepository generatedDataRepository;
 	

@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Table;
 import javax.persistence.Version;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Type;
 
@@ -25,6 +27,7 @@ public class GeneratedData {
 	private LocalDateTime date;
 
 	@Column(name="PURPOSE")
+	@Size(min=1, message="Can not be left empty.")
 	private String purpose;
 
 	@Column(name="USERNAME")
@@ -39,6 +42,7 @@ public class GeneratedData {
 	private Long nextSeqNum;
 	
 	@Version
+	@Max(0)
 	@Column(name="VERSION")
 	private Integer version;
 	
