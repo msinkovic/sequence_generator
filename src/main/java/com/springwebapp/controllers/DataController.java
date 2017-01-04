@@ -17,6 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -58,6 +59,11 @@ public class DataController {
 		model.addAttribute("allData", allData);
 		return "hello";
 	}
+	
+	 @RequestMapping(value = "/generatedDataList/{seqNum}", method = RequestMethod.GET)
+		public GeneratedData getGeneratedDataBySeqNum(@PathVariable("seqNum") long seqNum){
+			return generatedDataService.getGeneratedDataBySeqNum(seqNum);
+		}
 	
 	@RequestMapping(value = "/generateData", method = RequestMethod.POST)
 	public String setData(Model model){
