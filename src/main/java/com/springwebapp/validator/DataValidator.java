@@ -20,9 +20,6 @@ public class DataValidator implements Validator {
         GeneratedData data = (GeneratedData) object;
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "purpose", "NotEmpty");
-        if (data.getPurpose().length() < 3) {
-            errors.rejectValue("purpose", "Size.data.purpose");
-        }
         if (data.getVersion() != null) {
             errors.rejectValue("version", "DataVersion");
         }

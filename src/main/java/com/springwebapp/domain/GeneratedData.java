@@ -14,7 +14,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.Table;
 import javax.persistence.Version;
 import javax.validation.constraints.Max;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Type;
 
@@ -27,7 +27,8 @@ public class GeneratedData {
 	private LocalDateTime date;
 
 	@Column(name="PURPOSE")
-	@Size(min=1, message="Can not be left empty.")
+	//@Size(min=1, message="Can not be left empty.")
+	@NotNull
 	private String purpose;
 
 	@Column(name="USERNAME")

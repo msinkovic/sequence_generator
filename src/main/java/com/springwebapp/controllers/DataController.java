@@ -6,9 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -30,43 +27,35 @@ import com.springwebapp.validator.DataValidator;
 
 @Controller
 public class DataController {
-	
+
 	@Autowired
 	private DataValidator dataValidator;
-	
+
 	@Autowired
 	private GeneratedDataService generatedDataService;
-	
+
 	@Autowired
 	private GeneratedDataRepository generatedDataRepository;
 
 	@InitBinder
-    protected void initBinder(final HttpServletRequest request, final ServletRequestDataBinder binder) {
-        binder.addValidators(dataValidator);
-    }
-	
-	@Bean
-	public MessageSource messageSource() {
-	     ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-	     messageSource.setBasename("/resources");
-	     return messageSource;
+	protected void initBinder(final HttpServletRequest request, final ServletRequestDataBinder binder) {
+		binder.addValidators(dataValidator);
 	}
-	
+
 	@RequestMapping(value = "/generatedDataList", method = RequestMethod.GET)
-	public String dataList(Model model)
-	{
+	public String dataList(Model model) {
 		List<GeneratedData> allData = generatedDataService.listAllGeneratedData();
 		model.addAttribute("allData", allData);
 		return "hello";
 	}
-	
-	 @RequestMapping(value = "/generatedDataList/{seqNum}", method = RequestMethod.GET)
-		public GeneratedData getGeneratedDataBySeqNum(@PathVariable("seqNum") long seqNum){
-			return generatedDataService.getGeneratedDataBySeqNum(seqNum);
-		}
-	
-	@RequestMapping(value = "/generateData", method = RequestMethod.POST)
-	public String setData(Model model){
+
+	@RequestMapping(value = "/generatedDataList/{seqNum}", method = RequestMethod.GET)
+	public GeneratedData getGeneratedDataBySeqNum(@PathVariable("seqNum") long seqNum) {
+		return generatedDataService.getGeneratedDataBySeqNum(seqNum);
+	}
+
+	@RequestMapping(value = "/generateData")
+	public String setData(Model model) {
 		GeneratedData data = new GeneratedData();
 		List<GeneratedData> allData = generatedDataService.listAllGeneratedData();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -75,7 +64,7 @@ public class DataController {
 		model.addAttribute("data", data);
 		return "generateData";
 	}
-	
+
 	@PostMapping("/saveData")
     public String dataSubmit(@Valid @ModelAttribute("data") GeneratedData data, BindingResult bindingResult, @RequestParam(value = "version", required=false) Integer version, Model model) throws Exception{
 				

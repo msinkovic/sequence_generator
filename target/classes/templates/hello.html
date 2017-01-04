@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head lang="en">
+<head>
 <meta charset="utf-8" />
 
 
@@ -15,6 +15,8 @@
 	src="http://cdn.datatables.net/1.10.13/js/jquery.dataTables.js"></script>
 <script type="text/javascript" charset="utf8"
 	src="http://cdn.datatables.net/plug-ins/1.10.13/api/fnFilterClear.js"></script>
+<script type="text/javascript" charset="utf8" src="/js/datatable.js"></script>
+<script type="text/javascript" charset="utf8" src="/js/bootstrap.min.js"></script>
 
 <!--/*/ <th:block th:include="headerinc :: head"></th:block> /*/-->
 
@@ -29,6 +31,13 @@
 					<input type="submit" value="Claim new" />
 				</form>
 			</div>
+			<input id="goButton" type="button" value="GO!" onclick="search();"/>
+			<script>
+				function search(){
+					var e = jQuery.Event( 'keyup', { "which": "13" } );
+					$('#dataTable_filter input').trigger(e);
+				};
+			</script>
 			<table id="dataTable" class="table table-striped">
 				<thead>
 					<tr>
@@ -37,60 +46,10 @@
 						<th>Purpose</th>
 						<th>Date</th>
 					</tr>
-					<script type="text/javascript" class="init">
-						$(document)
-								.ready(
-										function() {
-											var table = $('#dataTable')
-													.DataTable(
-															{
-																"paginate" : true,
-																"pageLength" : 6,
-																"ordering" : false,
-																"lengthChange" : true,
-																"info" : false,
-																"pagingType" : "simple",
-																"language" : {
-																	"search" : ""
-																},
-																"lengthChange" : false
-															});
-
-											var info = table.page.info();
-
-											$('#tableInfo').html(
-													'Page ' + (info.page + 1)
-															+ ' / '
-															+ info.pages);
-
-											var oTable = $('#dataTable')
-													.dataTable();
-											var input = $('#dataTable_filter input')
-													.unbind();
-											$('#dataTable_filter input')
-													.bind(
-															'keyup',
-															function(e) {
-																if (e.keyCode == 13) {
-																	if (this.value.length > 2) {
-																		oTable
-																				.fnFilter(this.value);
-																	} else if (this.value.length == 0) {
-																		oTable
-																				.fnFilterClear();
-																	}
-																}
-															});
-
-										}
-										});
-					</script>
-					<button id="goButton">GO!</button>
 				</thead>
 				<tbody>
 					<tr th:each="data : ${allData}">
-						<td><a id="dataDetail"
-							th:text="${#numbers.formatInteger(data.seqNum,5)}"></a></td>
+						<td th:text="${#numbers.formatInteger(data.seqNum,5)}">NO.</td>
 						<td th:text="${data.username}">Submitted By</td>
 						<td th:text="${data.purpose}">Purpose</td>
 						<td
@@ -99,6 +58,91 @@
 				</tbody>
 			</table>
 			<div id="tableInfo"></div>
+			<script>
+				$(document).ready(
+						function() {
+							var table = $('#dataTable').DataTable();
+							$('#dataTable').on(
+									'click',
+									'tr',
+									function() {
+										var name = $('td', this).eq().text();
+										console.log(table.row(this).data()[0]);
+										$("#sequence").val(
+												table.row(this).data()[0]);
+										$("#user").val(
+												table.row(this).data()[1]);
+										$("#date").val(
+												table.row(this).data()[3]);
+										$("#purpose").val(
+												table.row(this).data()[2]);
+										$('#DescModal').modal("show");
+									});
+						});
+			</script>
+
+			<div class="modal fade" id="DescModal" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h3 class="modal-title">Document details</h3>
+
+						</div>
+						<div class="modal-body">
+
+							<div class="row dataTable">
+								<div class="col-md-4">
+									<label class="control-label">Sequence is</label>
+								</div>
+								<div class="col-md-8">
+									<input type="text" class="form-control" id="sequence"
+										name="sequence" disabled="disabled" />
+								</div>
+							</div>
+
+							<br />
+
+							<div class="row dataTable">
+								<div class="col-md-4">
+									<label class="control-label">By User</label>
+								</div>
+								<div class="col-md-8">
+									<input type="text" class="form-control" id="user" name="user"
+										disabled="disabled" />
+								</div>
+							</div>
+							<br />
+							<div class="row dataTable">
+								<div class="col-md-4">
+									<label class="control-label">Date created</label>
+								</div>
+								<div class="col-md-8">
+									<input type="text" class="form-control" id="date" name="date"
+										disabled="disabled" />
+								</div>
+							</div>
+							<br />
+							<div class="row dataTable">
+								<div class="col-md-4">
+									<label class="control-label">Purpose</label>
+								</div>
+								<div class="col-md-8">
+									<input type="text" class="form-control" id="purpose"
+										name="purpose" disabled="disabled" />
+								</div>
+							</div>
+							<br />
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default "
+								data-dismiss="modal">OK</button>
+						</div>
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal-dialog -->
+			</div>
+			<!-- /.modal -->
 
 		</div>
 		<div th:if="${#lists.isEmpty(allData)}">
