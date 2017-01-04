@@ -3,8 +3,6 @@
 <head>
 <meta charset="utf-8" />
 
-
-
 <link rel="stylesheet" type="text/css"
 	href="//cdnjs.cloudflare.com/ajax/libs/uikit/2.24.3/css/uikit.min.css" />
 <link rel="stylesheet" type="text/css"
@@ -15,6 +13,8 @@
 	src="http://cdn.datatables.net/1.10.13/js/jquery.dataTables.js"></script>
 <script type="text/javascript" charset="utf8"
 	src="http://cdn.datatables.net/plug-ins/1.10.13/api/fnFilterClear.js"></script>
+<script type="text/javascript" charset="utf8"
+	src="http://cdn.datatables.net/plug-ins/1.10.13/dataRender/ellipsis.js"></script>
 <script type="text/javascript" charset="utf8" src="/js/datatable.js"></script>
 <script type="text/javascript" charset="utf8" src="/js/bootstrap.min.js"></script>
 
@@ -31,12 +31,8 @@
 					<input type="submit" value="Claim new" />
 				</form>
 			</div>
-			<input id="goButton" type="button" value="GO!" onclick="search();"/>
+			<input id="goButton" type="button" value="GO!"/>
 			<script>
-				function search(){
-					var e = jQuery.Event( 'keyup', { "which": "13" } );
-					$('#dataTable_filter input').trigger(e);
-				};
 			</script>
 			<table id="dataTable" class="table table-striped">
 				<thead>
@@ -57,7 +53,7 @@
 					</tr>
 				</tbody>
 			</table>
-			<div id="tableInfo"></div>
+			<span id="tableInfo"></span>
 			<script>
 				$(document).ready(
 						function() {

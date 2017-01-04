@@ -2,7 +2,6 @@ package com.springwebapp.controllers;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +10,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,9 +35,10 @@ public class DataController {
 	@Autowired
 	private GeneratedDataRepository generatedDataRepository;
 
-	@InitBinder
-	protected void initBinder(final HttpServletRequest request, final ServletRequestDataBinder binder) {
+	@InitBinder("data")
+	protected void initBinder(WebDataBinder binder) {
 		binder.addValidators(dataValidator);
+		
 	}
 
 	@RequestMapping(value = "/generatedDataList", method = RequestMethod.GET)
@@ -65,13 +64,11 @@ public class DataController {
 		return "generateData";
 	}
 
-	@PostMapping("/saveData")
-    public String dataSubmit(@Valid @ModelAttribute("data") GeneratedData data, BindingResult bindingResult, @RequestParam(value = "version", required=false) Integer version, Model model) throws Exception{
+	@RequestMapping("/saveData")
+    public String dataSubmit(@ModelAttribute("data") @Valid GeneratedData data, BindingResult bindingResult, @RequestParam(value = "version", required=false) Integer version, Model model) throws Exception{
 				
-		dataValidator.validate(data, bindingResult);
-		
 		if (bindingResult.hasErrors()) {
-		       return "generateData";
+				return "generateData";
 		        
 		   } else {
 				generatedDataRepository.save(data);
