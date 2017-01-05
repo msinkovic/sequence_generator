@@ -27,7 +27,6 @@ public class GeneratedData {
 	private LocalDateTime date;
 
 	@Column(name="PURPOSE")
-	//@Size(min=1, message="Can not be left empty.")
 	@NotNull
 	private String purpose;
 

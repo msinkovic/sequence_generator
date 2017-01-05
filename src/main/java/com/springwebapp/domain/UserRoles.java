@@ -8,7 +8,7 @@ import java.util.Set;
 public class UserRoles {
 	private Long id;
 	private String name;
-	private Set<Users> users;
+	private Set<Users> userList;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,10 +30,10 @@ public class UserRoles {
 
 	@ManyToMany(mappedBy = "roles")
 	public Set<Users> getUsers() {
-		return users;
+		return userList;
 	}
 
 	public void setUsers(Set<Users> users) {
-		this.users = users;
+		this.userList = users;
 	}
 }
