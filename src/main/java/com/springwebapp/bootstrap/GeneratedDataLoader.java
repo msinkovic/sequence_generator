@@ -83,7 +83,7 @@ public class GeneratedDataLoader implements ApplicationListener<ContextRefreshed
 			dataRepository.save(test);
 			
 			test = new GeneratedData();
-			test.setPurpose("sedma sekvenca, da se vidi paging na dijelu");
+			test.setPurpose("sedma sekvenca, da se vidi paging na djelu");
 			sqlDate = LocalDateTime.now();
 			test.setDate(sqlDate);
 			test.setUsername("pero");
