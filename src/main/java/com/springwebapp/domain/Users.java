@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class Users {
 	private Long id;
 	@NotNull
