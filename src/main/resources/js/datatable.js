@@ -8,7 +8,7 @@ $(document).ready(function() {
 		"language" : {
 			"search" : "",
 			"paginate": {
-				"previous": "⇐",
+				"previous": "⇐            ",
 				"next": "⇒"
 			}
 		},

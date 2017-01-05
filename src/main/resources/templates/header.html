@@ -5,6 +5,7 @@
     <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
           th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}"
           rel="stylesheet" media="screen"/>
+         
 </head>
 <body>
 
@@ -13,7 +14,7 @@
         <nav class="navbar navbar-default">
             <div class="container-fluid">
 					Welcome, <span sec:authentication="name">user</span>
-                	<a th:href="@{/logout}">Logout</a>
+                	<a class="btn btn-default" th:href="@{/logout}">Logout</a>
             </div>
         </nav>
     </div>

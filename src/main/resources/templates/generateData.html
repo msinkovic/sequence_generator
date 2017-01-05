@@ -4,29 +4,30 @@
 		<link rel="stylesheet" type="text/css"
 			href="//cdnjs.cloudflare.com/ajax/libs/uikit/2.24.3/css/uikit.min.css" />
     	<title>New sequence</title>
-
+<!--/*/ <th:block th:include="headerinc :: head"></th:block> /*/-->
 	</head>
 	<body>
-		<div class="container">
-			<h2>Document details</h2>
-			<form name = "input" th:action = "@{/saveData}" th:object = "${data}" method = "post">
-			    <span class = "label">Sequence is</span>
-			    <input type="number" th:field="*{nextSeqNum}" readonly="readonly"/>
-			    <span th:if="${#fields.hasErrors('nextSeqNum')}" th:errors="*{version}"></span>
+	<!--/*/ <th:block th:include="header :: header"></th:block> /*/-->
+		<div class="modal-content">
+			<h2 class = "modal-title">Document details</h2>
+			<form class = "modal-body" name = "input" th:action = "@{/saveData}" th:object = "${data}" method = "post">
+			    <span class = "control-label">Sequence is</span>
+			    <input class = "form-control" type="text" th:field="*{nextSeqNum}" readonly="readonly"/>
+			    <span class = "control-label" th:if="${#fields.hasErrors('nextSeqNum')}" th:errors="*{nextSeqNum}">version</span>
 			    <br/><br/><br/>
-			    <span class = "label">By User</span>
-			    <input type="text" th:field="*{username}" readonly="readonly"/>
-				<span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+			    <span class = "control-label">By User</span>
+			    <input class = "form-control" type="text" th:field="*{username}" readonly="readonly"/>
+				<span class = "control-label" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
 				<br/><br/><br/>
-			    <span class = "label">Purpose</span>
-			    <input type="text" th:field="*{purpose}"/>
-			    <span th:if="${#fields.hasErrors('purpose')}" th:errors="*{purpose}"></span>
+			    <span class = "control-label">Purpose</span>
+			    <input class = "form-control" type="text" th:field="*{purpose}"/>
+			    <span class = "control-label" th:if="${#fields.hasErrors('purpose')}" th:errors="*{purpose}"></span>
 			    <br/><br/><br/>
-			    <input type="submit" value="Claim!" />
+			    <input class="btn btn-default" type="submit" value="Claim!" />
 			    <br/><br/><br/>
 		    </form>
 		    <form name = "cancel" th:action = "@{/generatedDataList}" method = "get">
-			    <input type="submit" value="Cancel"/>
+			    <input class="btn btn-default" type="submit" value="Cancel"/>
 		    </form>
 		</div>
 	</body>

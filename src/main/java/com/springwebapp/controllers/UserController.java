@@ -47,24 +47,21 @@ public class UserController {
 
         securityService.autologin(userForm.getUsername(), userForm.getPasswordConfirm());
 
-        return "redirect:/hello";
+        return "redirect:/index";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(String error, String logout, String empty, Model model) {
+    public String login(String error, String logout, Model model) {
         if (error != null)
             model.addAttribute("error", "Your username or password is invalid.");
 
         if (logout != null)
             model.addAttribute("message", "You have been logged out successfully.");
-        
-        if(empty != null)
-        	model.addAttribute("empty", "Username and password are required fields.");
 
         return "login";
     }
 
-    @RequestMapping(value = {"/", "/hello"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String welcome(Model model) {
     	return dataController.dataList(model);
     }

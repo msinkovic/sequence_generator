@@ -45,7 +45,7 @@ public class DataController {
 	public String dataList(Model model) {
 		List<GeneratedData> allData = generatedDataService.listAllGeneratedData();
 		model.addAttribute("allData", allData);
-		return "hello";
+		return "index";
 	}
 
 	@RequestMapping(value = "/generatedDataList/{seqNum}", method = RequestMethod.GET)
@@ -68,11 +68,12 @@ public class DataController {
     public String dataSubmit(@ModelAttribute("data") @Valid GeneratedData data, BindingResult bindingResult, @RequestParam(value = "version", required=false) Integer version, Model model) throws Exception{
 				
 		if (bindingResult.hasErrors()) {
+			model.addAttribute("data", data);
 				return "generateData";
 		        
 		   } else {
 				generatedDataRepository.save(data);
-		        return "redirect:/hello";
+		        return "redirect:/index";
 		   }
     }
 }

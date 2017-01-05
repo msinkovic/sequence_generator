@@ -17,6 +17,7 @@
 	src="http://cdn.datatables.net/plug-ins/1.10.13/dataRender/ellipsis.js"></script>
 <script type="text/javascript" charset="utf8" src="/js/datatable.js"></script>
 <script type="text/javascript" charset="utf8" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" charset="utf8" src="/js/popup.js"></script>
 
 <!--/*/ <th:block th:include="headerinc :: head"></th:block> /*/-->
 
@@ -28,10 +29,10 @@
 			<h2>Generated Sequences</h2>
 			<div class="pom">
 				<form th:action="@{/generateData}" method="post">
-					<input type="submit" value="Claim new" />
+					<input class="btn btn-default" type="submit" value="Claim new" />
 				</form>
 			</div>
-			<input id="goButton" type="button" value="GO!"/>
+			<input class="btn btn-default" id="goButton" type="button" value="GO!"/>
 			<script>
 			</script>
 			<table id="dataTable" class="table table-striped">
@@ -53,29 +54,7 @@
 					</tr>
 				</tbody>
 			</table>
-			<span id="tableInfo"></span>
-			<script>
-				$(document).ready(
-						function() {
-							var table = $('#dataTable').DataTable();
-							$('#dataTable').on(
-									'click',
-									'tr',
-									function() {
-										var name = $('td', this).eq().text();
-										console.log(table.row(this).data()[0]);
-										$("#sequence").val(
-												table.row(this).data()[0]);
-										$("#user").val(
-												table.row(this).data()[1]);
-										$("#date").val(
-												table.row(this).data()[3]);
-										$("#purpose").val(
-												table.row(this).data()[2]);
-										$('#DescModal').modal("show");
-									});
-						});
-			</script>
+			<div id="tableInfo"></div>
 
 			<div class="modal fade" id="DescModal" role="dialog">
 				<div class="modal-dialog">
