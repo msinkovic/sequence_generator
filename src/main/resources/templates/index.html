@@ -26,7 +26,7 @@
 	<div class="container">
 		<!--/*/ <th:block th:include="header :: header"></th:block> /*/-->
 		<div th:if="${not #lists.isEmpty(allData)}">
-			<h2>Generated Sequences</h2>
+			<h2 style="text-align: center">Generated Sequences</h2>
 			<div class="pom">
 				<form th:action="@{/generateData}" method="post">
 					<input class="btn btn-default" type="submit" value="Claim new" />
