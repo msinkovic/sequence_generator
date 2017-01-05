@@ -97,11 +97,6 @@
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
-		
-		<dependency>
-    		<groupId>commons-digester</groupId>
-		    <artifactId>commons-digester</artifactId>
-		</dependency>
 	</dependencies>
 
 	<build>
