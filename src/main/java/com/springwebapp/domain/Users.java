@@ -8,9 +8,12 @@ import java.util.Set;
 @Entity
 @Table(name = "USERS")
 public class Users {
+	@Column(name="ID")
 	private Long id;
+	@Column(name="username", unique=true)
 	@NotNull
 	private String username;
+	@Column(name="password")
 	@NotNull
 	private String password;
 	private String passwordConfirm;
