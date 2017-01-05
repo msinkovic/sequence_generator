@@ -1,0 +1,10 @@
+{
+  "groups": [{
+    "name": "spring.datasource",
+    "type": "javax.sql.DataSource",
+    "sourceType": "com.springwebapp.configuration.DatabaseConfiguration",
+    "sourceMethod": "public javax.sql.DataSource dataSource() "
+  }],
+  "properties": [],
+  "hints": []
+}

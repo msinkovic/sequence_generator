@@ -2,7 +2,6 @@ package com.springwebapp.bootstrap;
 
 import java.time.LocalDateTime;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -23,12 +22,6 @@ public class GeneratedDataLoader implements ApplicationListener<ContextRefreshed
 	private UsersRepository userRepository;
 	private UserRolesRepository userRolesRepository;
 
-	private Logger logData = Logger.getLogger(GeneratedDataLoader.class);
-
-	private Logger logUser = Logger.getLogger(UsersLoader.class);
-
-	private Logger logRole = Logger.getLogger(UserRolesLoader.class);
-
 	@Autowired
 	public void setDataRepository(GeneratedDataRepository dataRepository) {
 		this.dataRepository = dataRepository;
@@ -47,60 +40,82 @@ public class GeneratedDataLoader implements ApplicationListener<ContextRefreshed
 
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 
-		for (int i = 0; i < 20; i++) {
 			GeneratedData test = new GeneratedData();
 			LocalDateTime sqlDate = LocalDateTime.now();
 			test.setDate(sqlDate);
-			test.setPurpose("nekaj random");
+			test.setPurpose("nesto random");
 			test.setUsername("pero");
 			dataRepository.save(test);
-			logData.info("Saved transaction - id: " + test.getSeqNum());
-		}
+			
+			test = new GeneratedData();
+			test.setPurpose("nesto ne tolko random");
+			sqlDate = LocalDateTime.now();
+			test.setDate(sqlDate);
+			test.setUsername("jurica");
+			dataRepository.save(test);
+			
+			test = new GeneratedData();
+			test.setPurpose("malo duzi tekst za testiranje trimmanja");
+			sqlDate = LocalDateTime.now();
+			test.setDate(sqlDate);
+			test.setUsername("jurica");
+			dataRepository.save(test);
+			
+			test = new GeneratedData();
+			test.setPurpose("asd");
+			sqlDate = LocalDateTime.now();
+			test.setDate(sqlDate);
+			test.setUsername("pero");
+			dataRepository.save(test);
+			
+			test = new GeneratedData();
+			test.setPurpose("need this");
+			sqlDate = LocalDateTime.now();
+			test.setDate(sqlDate);
+			test.setUsername("pero");
+			dataRepository.save(test);
+			
+			test = new GeneratedData();
+			test.setPurpose("jos jedna sekvenca");
+			sqlDate = LocalDateTime.now();
+			test.setDate(sqlDate);
+			test.setUsername("jurica");
+			dataRepository.save(test);
+			
+			test = new GeneratedData();
+			test.setPurpose("sedma sekvenca, da se vidi paging na dijelu");
+			sqlDate = LocalDateTime.now();
+			test.setDate(sqlDate);
+			test.setUsername("pero");
+			dataRepository.save(test);
+			
 
-		for (int i = 0; i < 20; i++) {
-			GeneratedData test2 = new GeneratedData();
-			test2.setPurpose("nekaj ne tolko random");
-			LocalDateTime sqlDate2 = LocalDateTime.now();
-			test2.setDate(sqlDate2);
+			BCryptPasswordEncoder pwd = new BCryptPasswordEncoder(6);
+	
+			Users test2 = new Users();
+			test2.setUsername("pero");
+			test2.setPassword(pwd.encode("password"));
+	
+			userRepository.save(test2);
+	
+	
+			pwd = new BCryptPasswordEncoder(6);
+	
+			test2 = new Users();
 			test2.setUsername("jurica");
-			dataRepository.save(test2);
-
-			logData.info("Saved transaction - id:" + test2.getSeqNum());
+			test2.setPassword(pwd.encode("password123"));
+	
+			userRepository.save(test2);
+	
+			UserRoles test3 = new UserRoles();
+			test3.setName("Admin");
+	
+			userRolesRepository.save(test3);
+	
+			test3 = new UserRoles();
+			test3.setName("User");
+	
+			userRolesRepository.save(test3);
 		}
-
-		BCryptPasswordEncoder pwd = new BCryptPasswordEncoder(6);
-
-		Users test3 = new Users();
-		test3.setUsername("pero");
-		test3.setPassword(pwd.encode("password"));
-
-		userRepository.save(test3);
-
-		logUser.info("Saved transaction - id: " + test3.getUsername());
-
-		pwd = new BCryptPasswordEncoder(6);
-
-		Users test4 = new Users();
-		test4.setUsername("jurica");
-		test4.setPassword(pwd.encode("password123"));
-
-		userRepository.save(test4);
-
-		logUser.info("Saved transaction - id:" + test4.getUsername());
-
-		UserRoles test5 = new UserRoles();
-		test5.setName("Admin");
-
-		logRole.info("Saved Role:" + test5.getName());
-
-		userRolesRepository.save(test5);
-
-		UserRoles test6 = new UserRoles();
-		test6.setName("User");
-
-		logRole.info("Saved Role:" + test6.getName());
-
-		userRolesRepository.save(test6);
-	}
 
 }
