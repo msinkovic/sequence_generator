@@ -2,35 +2,52 @@
   <head>
     <title tiles:fragment="title">Document sequence generator</title>
     <link rel="stylesheet" type="text/css"
-	href="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.24.3/css/uikit.min.css" />
+			href="//cdnjs.cloudflare.com/ajax/libs/uikit/2.24.3/css/uikit.min.css" />
+	<script type="text/javascript">
+		function validateInput() {
+			var x = document.forms["f"]["username"].value;
+		    if (x == "") {
+		    	$('#emptyField').html('Name must be filled out');
+		        return false;
+		    }
+		    x = document.forms["f"]["password"].value;
+		    if (x == "") {
+		    	$('#emptyField').html('Password must be filled out');
+		        return false;
+		    }
+		}
+	</script>
 </head>
   <body>
-  	<div class="container-fluid">
+  	<div class="modal-content">
   		<div class = "message" style="width:80%;margin:0 auto;height:30px">
-            <div th:if="${param.error}" class="alert alert-error" style="color:red;text-align:center">    
+            <div th:if="${param.error}" class="alert alert-error" style="color:red;text-align:center;margin-top:10px;">    
             	Invalid username or password.
             </div>
-        	<div th:if="${param.logout}" class="alert alert-success" style="color:red;text-align:center"> 
+        	<div th:if="${param.logout}" class="alert alert-success" style="color:red;text-align:center;margin-top:10px"> 
                 You have been logged out.
             </div>
+            <span id="emptyField" style="color:red;text-align:center;margin-top:10px"></span>
         </div>
-
-    	<h2 style="text-align: center">Document sequence generator</h2>
-        <form name="f" th:action="@{/login}" method="post">               
-            <fieldset style="border: 0;margin:0 auto;">                
-                <div class = "name">
-                	<label for="username">Username</label>
-                	<input type="text" id="username" name="username" required="required"/>
+	
+    	<h2 class="modal-title" style="text-align: center">Document sequence generator</h2>
+        <form class = "modal-body" name="f" th:action="@{/login}" method="post" onsubmit="return validateInput()">               
+            <fieldset style="border: 0;width:60%; margin: 0 auto">                
+                <div class = "name" style="width:50%; margin: 0 auto">
+                	<span class="control-label" style="text-align:center">Username</span><br/><br/>
+                	<input class = "form-control" type="text" id="username" name="username" style="width:100%; margin: 0 auto"/>
                 </div>
-                <div class = "pass">        
-                	<label for="password">Password</label>
-                	<input type="password" id="password" name="password" required="required"/>    
+                <br/><br/><br/>
+                <div class = "pass" style="width:50%; margin: 0 auto">        
+                	<span class="control-label" style="text-align:center">Password</span><br/><br/>
+                	<input class = "form-control" type="password" id="password" name="password" style="width:100%; margin: 0 auto"/>    
                 </div>
-                <div class="form-actions">
-                    <button type="submit" class="btn">Log in</button>
+                <br/><br/><br/>
+                <div class="form-actions" style="width:51px; margin: 0 auto">
+                    <button class="btn btn-default" type="submit">Log in</button>
                 </div>
             </fieldset>
         </form>
-    </div>
+        </div>
   </body>
 </html>
