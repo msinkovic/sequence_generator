@@ -26,7 +26,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/resources/**", "/registration").permitAll()
+                    .antMatchers("/resources/**").permitAll()
                     .anyRequest().authenticated()
                     .and()
                 .formLogin()
@@ -34,7 +34,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .permitAll()
                     .and()
                 .logout()
-                    .permitAll();
+                    .permitAll()
+                    .and()
+                .sessionManagement()
+                    .maximumSessions(1)
+                    .expiredUrl("/login?logout");
 
         http.csrf().disable();
         http.headers().frameOptions().disable(); //inace H2 prazno

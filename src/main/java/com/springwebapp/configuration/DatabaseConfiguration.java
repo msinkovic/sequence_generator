@@ -13,13 +13,13 @@ import org.springframework.context.annotation.Primary;
 @Configuration
 @Primary
 public class DatabaseConfiguration {
-	@Bean
+	/*@Bean
 	ServletRegistrationBean h2servletRegistration() {
 		ServletRegistrationBean registrationBean = new ServletRegistrationBean(new WebServlet());
 		registrationBean.addUrlMappings("/console/*");
 		return registrationBean;
-	}
-	 /*@Bean
+	}*/
+	@Bean
 	    public BasicDataSource dataSource() throws URISyntaxException {
 	        URI dbUri = new URI(System.getenv("DATABASE_URL"));
 
@@ -33,5 +33,5 @@ public class DatabaseConfiguration {
 	        basicDataSource.setPassword(password);
 
 	        return basicDataSource;
-	    }*/
+	    }
 }

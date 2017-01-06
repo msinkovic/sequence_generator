@@ -14,7 +14,8 @@ public class UserController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(String error, String logout, Model model) {
-        if (error != null)
+        
+    	if (error != null)
             model.addAttribute("error", "Your username or password is invalid.");
 
         if (logout != null)

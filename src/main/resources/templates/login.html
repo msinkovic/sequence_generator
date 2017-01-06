@@ -3,20 +3,6 @@
     <title tiles:fragment="title">Document sequence generator</title>
     <link rel="stylesheet" type="text/css"
 			href="//cdnjs.cloudflare.com/ajax/libs/uikit/2.24.3/css/uikit.min.css" />
-	<script type="text/javascript">
-		function validateInput() {
-			var x = document.forms["f"]["username"].value;
-		    if (x == "") {
-		    	$('#emptyField').html('Name must be filled out');
-		        return false;
-		    }
-		    x = document.forms["f"]["password"].value;
-		    if (x == "") {
-		    	$('#emptyField').html('Password must be filled out');
-		        return false;
-		    }
-		}
-	</script>
 </head>
   <body>
   	<div class="modal-content">
@@ -24,14 +10,16 @@
             <div th:if="${param.error}" class="alert alert-error" style="color:red;text-align:center;margin-top:10px;">    
             	Invalid username or password.
             </div>
-        	<div th:if="${param.logout}" class="alert alert-success" style="color:red;text-align:center;margin-top:10px"> 
+        	<div th:if="${param.logout}" class="alert alert-success" style="color:blue;text-align:center;margin-top:10px"> 
                 You have been logged out.
             </div>
-            <span id="emptyField" style="color:red;text-align:center;margin-top:10px"></span>
+			<div th:if="${param.empty}" class="alert alert-empty" style="color:red;text-align:center;margin-top:10px"> 
+                Username and password are required fields.
+            </div>
         </div>
 	
     	<h2 class="modal-title" style="text-align: center">Document sequence generator</h2>
-        <form class = "modal-body" name="f" th:action="@{/login}" method="post" onsubmit="return validateInput()">               
+        <form class = "modal-body" name="f" th:action="@{/login}" method="post">               
             <fieldset style="border: 0;width:60%; margin: 0 auto">                
                 <div class = "name" style="width:50%; margin: 0 auto">
                 	<span class="control-label" style="text-align:center">Username</span><br/><br/>
