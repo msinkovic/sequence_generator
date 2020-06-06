@@ -21,6 +21,8 @@ When dependencies are installed, start the application by entering
 
 That command will start the [Jetty] server on `http://localhost:8080/` and start [H2 database] filled with some dummy data.
 
+There are two defined users in database, `jurica: password` and `pero: password`. The initial login users can be added to database manually.
+
 ## Deployment
 We also support deployment to [Heroku] server, but it requires some tempering with application source and configuration.
 1) in `application.properties` comment everything except Heroku-specific properties
