@@ -1,4 +1,4 @@
-#SEQUENCE GENERATOR
+# SEQUENCE GENERATOR
 This is a small application used for nothing in particular, really. 
 It assigns a unique 5-digit number for some assigned purpose.
 
