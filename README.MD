@@ -21,7 +21,7 @@ When dependencies are installed, start the application by entering
 
 That command will start the [Jetty] server on `http://localhost:8080/` and start [H2 database] filled with some dummy data.
 
-There are two defined users in database, `jurica: password` and `pero: password`. The initial login users can be added to database manually.
+There are two defined users in database, `jurica: password123` and `pero: password`. The initial login users can be added to database manually. They are defined in `com.springwebapp.bootstrap.GeneratedDataLoader`.
 
 ## Deployment
 We also support deployment to [Heroku] server, but it requires some tempering with application source and configuration.
