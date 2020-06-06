@@ -40,7 +40,7 @@ public class GeneratedDataLoader implements ApplicationListener<ContextRefreshed
 
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 
-			/*GeneratedData test = new GeneratedData();
+			GeneratedData test = new GeneratedData();
 			LocalDateTime sqlDate = LocalDateTime.now();
 			test.setDate(sqlDate);
 			test.setPurpose("nesto random");
@@ -115,7 +115,7 @@ public class GeneratedDataLoader implements ApplicationListener<ContextRefreshed
 			test3 = new UserRoles();
 			test3.setName("User");
 	
-			userRolesRepository.save(test3);*/
+			userRolesRepository.save(test3);
 		}
 
 }
